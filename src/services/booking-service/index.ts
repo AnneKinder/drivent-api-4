@@ -38,7 +38,7 @@ async function getBookingByUserId(userId: number) {
 }
 
 async function createBooking(userId: number, roomId: number) {
-  getTicketByUserId(userId);
+  await getTicketByUserId(userId);
 
   try {
     const room = await bookingRepository.findRoomById(roomId);
