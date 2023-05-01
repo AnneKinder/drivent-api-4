@@ -2,6 +2,7 @@ import ticketService from '../tickets-service';
 import { cannotAccessBookingError, notFoundError } from '@/errors';
 import ticketsRepository from '@/repositories/tickets-repository';
 import bookingRepository from '@/repositories/booking-repository';
+import { CreateBookingParams } from '@/protocols';
 
 async function getTicketByUserId(userId: number) {
   try {
@@ -46,7 +47,14 @@ async function createBooking(userId: number, roomId: number) {
     throw cannotAccessBookingError();
   }
 
-  await bookingRepository.create(userId, roomId);
+  //await bookingRepository.create(userId, roomId);
+
+  const bookingData: CreateBookingParams = {
+    userId,
+    roomId,
+  };
+
+  await bookingRepository.createBooking(bookingData);
 
   const { id } = await bookingRepository.findBookingByUserId(userId);
   return id;

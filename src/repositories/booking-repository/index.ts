@@ -1,5 +1,6 @@
 import { Booking, Room } from '@prisma/client';
 import { prisma } from '@/config';
+import { CreateBookingParams } from '@/protocols';
 
 async function findBookingByUserId(userId: number): Promise<Booking> {
   return prisma.booking.findFirst({
@@ -15,6 +16,12 @@ async function create(userId: number, roomId: number): Promise<Booking> {
       userId,
       roomId,
     },
+  });
+}
+
+async function createBooking(booking: CreateBookingParams) {
+  return prisma.booking.create({
+    data: booking,
   });
 }
 
@@ -51,6 +58,7 @@ const bookingRepository = {
   findRoomById,
   countTakenSpots,
   updateBooking,
+  createBooking,
 };
 
 export default bookingRepository;
