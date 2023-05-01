@@ -33,7 +33,11 @@ export async function changeBooking(req: AuthenticatedRequest, res: Response, ne
 
   try {
     await bookingService.updateBooking(Number(bookingId), roomId, userId);
-    return res.status(httpStatus.OK).send(bookingId);
+
+    const result = {
+      bookingId: bookingId,
+    };
+    return res.status(httpStatus.OK).send(result);
   } catch (error) {
     next(error);
   }
