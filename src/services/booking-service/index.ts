@@ -24,7 +24,14 @@ async function getBookingByUserId(userId: number) {
       throw notFoundError();
     }
 
-    return booking;
+    const roomInfo = await bookingRepository.findRoomById(booking.roomId);
+
+    const result = {
+      id: booking.id,
+      Room: roomInfo,
+    };
+
+    return result;
   } catch {
     throw notFoundError();
   }
