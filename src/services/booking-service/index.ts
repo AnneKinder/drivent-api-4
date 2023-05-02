@@ -47,8 +47,6 @@ async function createBooking(userId: number, roomId: number) {
     throw cannotAccessBookingError();
   }
 
-  //await bookingRepository.create(userId, roomId);
-
   const bookingData: CreateBookingParams = {
     userId,
     roomId,

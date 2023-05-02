@@ -10,15 +10,6 @@ async function findBookingByUserId(userId: number): Promise<Booking> {
   });
 }
 
-async function create(userId: number, roomId: number): Promise<Booking> {
-  return prisma.booking.create({
-    data: {
-      userId,
-      roomId,
-    },
-  });
-}
-
 async function createBooking(booking: CreateBookingParams) {
   return prisma.booking.create({
     data: booking,
@@ -54,7 +45,6 @@ async function updateBooking(bookingId: number, roomId: number) {
 
 const bookingRepository = {
   findBookingByUserId,
-  create,
   findRoomById,
   countTakenSpots,
   updateBooking,
